@@ -1,0 +1,7 @@
+## **Migration Guide to Migrate from oasp4j-2.3.0 to oasp4j-2.4.0**
+
+The class _io.oasp.module.jpa.dataaccess.api.common.AdvancedRevisionEntity.java_ is moved to package _io.oasp.module.jpa.dataaccess.api_ and the deprecated version of this class is moved to the package _io.oasp.module.jpa.dataaccess.base_. To migrate from OASP4J-2.3.0 to OASP4J-2.4.0, follow the steps below 
+
+- Make the changes pertaining to the importing the class _io.oasp.module.jpa.dataaccess.api.AdvancedRevisionEntity.java_ in all the classes where earlier , the class _io.oasp.module.jpa.dataaccess.api.common.AdvancedRevisionEntity.java_ was  imported instead.
+
+- Do a 'mvn clean install' of the project.
