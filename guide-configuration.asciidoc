@@ -20,15 +20,23 @@ The OASP recommends using http://projects.spring.io/spring-boot/[spring-boot] to
 For a complete documentation see the http://docs.spring.io/spring-boot/docs/current-SNAPSHOT/reference/htmlsingle/[Spring Boot Reference Guide].
 
 With spring-boot you provide a simple _main class_ (also called starter class) like this:
-
+//Using new SpringBootApp now
+//io.oasp.application.mtsj
 [source, java]
 ----
 @SpringBootApplication(exclude = { EndpointAutoConfiguration.class })
-@EntityScan(basePackages = { "io.oasp.gastronomy.restaurant" }, basePackageClasses = { AdvancedRevisionEntity.class })
+@EntityScan(basePackages = { "io.oasp.application.mtsj" }, basePackageClasses = { AdvancedRevisionEntity.class })
 @EnableGlobalMethodSecurity(jsr250Enabled = true)
+@ComponentScan(basePackages = { "io.oasp.application.mtsj.general", "io.oasp.application.mtsj" })
 public class SpringBootApp {
 
+  /**
+   * Entry point for spring-boot based app
+   *
+   * @param args - arguments
+   */
   public static void main(String[] args) {
+
     SpringApplication.run(SpringBootApp.class, args);
   }
 }
@@ -88,10 +96,10 @@ See https://github.com/oasp/oasp4j/blob/develop/samples/core/src/main/java/io/oa
 
 === WebSocket configuration
 A websocket endpoint is configured within the business package as a Spring configuration class. The annotation `@EnableWebSocketMessageBroker` makes Spring Boot registering this endpoint.
- 
+//Changed path due to non existent configuration in the example project
 [source, java]
 ----
-package io.oasp.gastronomy.restaurant.salesmanagement.websocket.config;
+package your.path.to.the.websocket.config;
 ...
 @Configuration
 @EnableWebSocketMessageBroker

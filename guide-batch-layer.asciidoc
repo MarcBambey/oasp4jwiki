@@ -21,7 +21,7 @@ The business component is defined by the link:architecture[business architecture
 
 Let's make an example for that. The sample application implements a batch for exporting bills. This _billExport_ belongs to the salesmanagement business component.
 So the _billExport_ is implemented in the following package:
-
+//Example doesn't exist anymore and I didn't find any other used batches. 
 [source]
 <basepackage>.salesmanagement.batch.impl.billexport.*
 
@@ -73,7 +73,7 @@ Example for the CommandLineJobRunner:
 ----
 java org.springframework.batch.core.launch.support.CommandLineJobRunner classpath:config/app/batch/beans-billexport.xml billExportJob -outputFile=file:out.csv date(date)=2015/12/20
 ----
-
+//Batch doesn't exist anymore and I didn't find a new example in the code
 Example for the SpringBootBatchCommandLine:
 ----
 java io.oasp.module.batch.common.base.SpringBootBatchCommandLine io.oasp.gastronomy.restaurant.SpringBootBatchApp classpath:config/app/batch/beans-billexport.xml billExportJob -outputFile=file:out.csv date(date)=2015/12/20
@@ -88,7 +88,7 @@ When trying to restart a batch that was already complete, there will either be a
 ==== Stopping a Job
 
 The command line option to stop a running execution is as follows:
-
+//Batch doesn't exist anymore and I didn't find a new example in the code
 ----
 java org.springframework.batch.core.launch.support.CommandLineJobRunner classpath:config/app/batch/beans-billexport.xml –stop billExportJob
 ----
@@ -229,7 +229,7 @@ Note that you could also delete the bills directly. However, for being able to d
 Also note that in real systems you would usually create a backup of data as important as bills, which is not done here.
 
 The beans-billexport.xml (located in src/main/resources/config/app/batch) has to look like this to implement the batch. Note that you might not fully understand this example by now, but you should after reading the whole chapter on batches.
-
+//Same as for everything else here: The Billexport doesn't exist anymore
 [source,xml]
 ----
 <?xml version="1.0" encoding="UTF-8"?>

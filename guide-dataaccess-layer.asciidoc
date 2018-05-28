@@ -311,40 +311,96 @@ If you need to also return the total number of hits available, you can set +Sear
 For the table entity we can make a search request by accessing the REST endpoint with pagination support like in the following examples:
 
 
-
+//Used new Pagination example with Dishmanagement
+//io.oasp.application.mtsj.dishmanagement.service.rest
 [source,json]
 ----
-POST oasp4j-sample-server/services/rest/tablemanagement/v1/table/search
+POST oasp4j-sample-server/services/rest/dishmanagement/v1/dish/search
 {
-  "pagination": { 
-    "size":2,
+  "pagination": {
+    "size":1,
     "total":true
-  }
+  },
+
+"maxPrice": 14,
+"categories": [],
+"minLikes": 0,
+"searchBy": "",
+"showOrder": 0,
+"fav": false
 }
 
 //Response
 {
     "pagination": {
-        "size": 2,
+        "size": 1,
         "page": 1,
-        "total": 11
+        "total": 4
     },
     "result": [
         {
-            "id": 101,
-            "modificationCounter": 1,
-            "revision": null,
-            "waiterId": null,
-            "number": 1,
-            "state": "OCCUPIED"
-        },
-        {
-            "id": 102,
-            "modificationCounter": 1,
-            "revision": null,
-            "waiterId": null,
-            "number": 2,
-            "state": "FREE"
+            "dish": {
+                "id": 0,
+                "modificationCounter": 1,
+                "revision": null,
+                "name": "Thai Spicy Basil Fried Rice",
+                "description": "This is a staple of Thai cooking. Adjust the spices to your own tastes for a really great use for leftover rice!! I get the basil from a local Asian market. It has a different flavor than that of regular basil and makes all the difference in this recipe. It is fast and fairly easy to make, but requires constant stirring",
+                "price": 12.99,
+                "imageId": 0
+            },
+            "image": {
+                "id": 0,
+                "modificationCounter": 1,
+                "revision": null,
+                "name": "basil-fried",
+                "content": "data:image/jpeg;......                
+                "contentType": "Binary",
+                "mimeType": "image/jpeg"
+            },
+            "extras": [
+                {
+                    "id": 1,
+                    "modificationCounter": 1,
+                    "revision": null,
+                    "name": "Extra curry",
+                    "description": "The common feature is the use of complex combinations of spices or herbs, usually including fresh or dried hot chillies.",
+                    "price": 1
+                },
+                {
+                    "id": 0,
+                    "modificationCounter": 1,
+                    "revision": null,
+                    "name": "Tofu",
+                    "description": "Also known as bean curd, is a food made by coagulating soy milk and then pressing the resulting curds into soft white blocks. ",
+                    "price": 1
+                }
+            ],
+            "categories": [
+                {
+                    "id": 0,
+                    "modificationCounter": 1,
+                    "revision": null,
+                    "name": "Main Dishes",
+                    "description": "Main Dishes",
+                    "showOrder": 0
+                },
+                {
+                    "id": 4,
+                    "modificationCounter": 1,
+                    "revision": null,
+                    "name": "Rice",
+                    "description": "Dishes that contain rice",
+                    "showOrder": 2
+                },
+                {
+                    "id": 7,
+                    "modificationCounter": 1,
+                    "revision": null,
+                    "name": "Vegetarian",
+                    "description": "Vegetarian food",
+                    "showOrder": 2
+                }
+            ]
         }
     ]
 }
@@ -353,41 +409,74 @@ POST oasp4j-sample-server/services/rest/tablemanagement/v1/table/search
 NOTE: As we are requesting with the +total+ property set to +true+ the server responds with the total count of rows for the query.
 
 For retrieving a concrete page, we provide the +page+ attribute with the desired value. Here we also left out the +total+ property so the server doesn't incur on the effort to calculate it:
-
+//Used new Pagination example with Dishmanagement
+//io.oasp.application.mtsj.dishmanagement.service.rest
 [source,json]
 ----
-POST oasp4j-sample-server/services/rest/tablemanagement/v1/table/search
+POST oasp4j-sample-server/services/rest/dishmanagement/v1/dish/search
 {
-  "pagination": { 
-    "size":2, 
-    "page":2
-  }
+  "pagination": {
+    "size":1,
+    "page":2,
+    "total":true
+  },
+
+"maxPrice": 14,
+"categories": [],
+"minLikes": 0,
+"searchBy": "",
+"showOrder": 0,
+"fav": false
 }
 
 //Response
 
 {
     "pagination": {
-        "size": 2,
+        "size": 1,
         "page": 2,
-        "total": null
+        "total": 4
     },
     "result": [
         {
-            "id": 103,
-            "modificationCounter": 1,
-            "revision": null,
-            "waiterId": null,
-            "number": 3,
-            "state": "FREE"
-        },
-        {
-            "id": 104,
-            "modificationCounter": 1,
-            "revision": null,
-            "waiterId": null,
-            "number": 4,
-            "state": "FREE"
+            "dish": {
+                "id": 1,
+                "modificationCounter": 1,
+                "revision": null,
+                "name": "Garlic Paradise",
+                "description": "From the world-famous Gilroy Garlic Festival to a fierce 40-clove garlic chicken in San Francisco and a gut-busting garlic sandwich in Philly, we feature the tastiest places to get your garlic on.",
+                "price": 7.99,
+                "imageId": 1
+            },
+            "image": {
+                "id": 1,
+                "modificationCounter": 1,
+                "revision": null,
+                "name": "garlic-paradise",
+                "content": "data:image/...
+                "contentType": "Binary",
+                "mimeType": "image/jpeg"
+            },
+            "extras": [
+                {
+                    "id": 1,
+                    "modificationCounter": 1,
+                    "revision": null,
+                    "name": "Extra curry",
+                    "description": "The common feature is the use of complex combinations of spices or herbs, usually including fresh or dried hot chillies.",
+                    "price": 1
+                }
+            ],
+            "categories": [
+                {
+                    "id": 0,
+                    "modificationCounter": 1,
+                    "revision": null,
+                    "name": "Main Dishes",
+                    "description": "Main Dishes",
+                    "showOrder": 0
+                }
+            ]
         }
     ]
 }
@@ -404,48 +493,65 @@ If you already use the pagination support (see above), you do not need to call +
 
 === Relationships
 ==== n:1 and 1:1 Relationships
-Entities often do not exist independently but are in some relation to each other. For example, for every period of time one of the StaffMember's of the restaurant example has worked, which is represented by the class +WorkingTime+, there is a relationship to this StaffMember. 
-				
+//Using the Booking example now since the old one is removed
+//io.oasp.application.mtsj.bookingmanagement.dataaccess.api;
+//Test needs updating aswell, not sure if I'm supposed to do that
+Entities often do not exist independently but are in some relation to each other. For example, for every period of time one of the StaffMember's of the restaurant example has worked, which is represented by the class +WorkingTime+, there is a relationship to this StaffMember. 				
 The following listing shows how this can be modeled using JPA:
 [source,java]
 ----
 ...
 
 @Entity
-public class WorkingTime {
+@Table(name = "Booking")
+public class BookingEntity extends ApplicationPersistenceEntity implements Booking {
    ...
 
-   private StaffMember staffMember;
+   private TableEntity table;
  
-   @ManyToOne
-   @JoinColumn(name="STAFFMEMBER")
-   public StaffMember getStaffMember() {
-      return staffMember;
-   }
- 
-   public void setStaffMember(StaffMember staffMember) {
-      this.staffMember = staffMember;
-   }
+  /**
+   * @return table
+   */
+  @ManyToOne(fetch = FetchType.EAGER)
+  @JoinColumn(name = "idTable")
+  public TableEntity getTable() {
+
+    return this.table;
+  }
+
+  /**
+   * @param table new value of {@link #gettable}.
+   */
+  public void setTable(TableEntity table) {
+
+    this.table = table;
+  }
+
+  ... 
 }
 ----
 To represent the relationship, an attribute of the type of the corresponding entity class that is referenced has been introduced. The relationship is a n:1 relationship, because every +WorkingTime+ belongs to exactly one +StaffMember+, but a +StaffMember+ usually worked more often than once. +
 This is why the +@ManyToOne+ annotation is used here. For 1:1 relationships the +@OneToOne+ annotation can be used which works basically the same way. To be able to save information about the relation in the database, an additional column in the corresponding table of WorkingTime is needed which contains the primary key of the referenced StaffMember. With the +name+ element of the +@JoinColumn+ annotation it is possible to specify the name of this column.
-
+//Adjusted the example with the table. 
 ==== 1:n and n:m Relationships
 The relationship of the example listed above is currently an unidirectional one, as there is a getter method for retrieving the +StaffMember+ from the +WorkingTime+ object, but not vice versa. 
 
-To make it a bidirectional one, the following code has to be added to +StaffMember+:
+To make it a bidirectional one, the following code has to be added to +TableEntity+:
 [source,java]
 ----
-  private Set<WorkingTimes> workingTimes;
+  private Set<BookingEntity> bookings;
  
-  @OneToMany(mappedBy="staffMember")
-  public Set<WorkingTime> getWorkingTimes() {
-    return workingTimes;
+  
+  @OneToMany(mappedBy = "idTable", fetch = FetchType.LAZY)
+  public Set<BookingEntity> getBookings() {
+
+    return this.bookings;
   }
-       
-  public void setWorkingTimes(Set<WorkingTime> workingTimes) {
-    this.workingTimes = workingTimes;
+
+  
+  public void setBookings(Set<BookingEntity> bookings) {
+
+    this.bookings = bookings;
   }
 ----
 To make the relationship bidirectional, the tables in the database do not have to be changed. Instead the column that corresponds to the attribute +staffMember+ in class +WorkingTime+ is used, which is specified by the +mappedBy+ element of the +@OneToMany+ annotation. Hibernate will search for corresponding +WorkingTime+ objects automatically when a +StaffMember+ is loaded.
@@ -456,35 +562,47 @@ the +staffMember+ attribute of that +WorkingTime+ object is set. That is why the
 For 1:n and n:m relations, the OASP4J demands that (unordered) Sets and no other collection types are used, as shown in the listing above. The only exception is whenever an ordering is really needed, (sorted) lists can be used. +
 For example, if +WorkingTime+ objects should be sorted by their start time, this could be done like this:
 [source,java]
+//io.oasp.application.mtsj.bookingmanagement.dataaccess.api;
 ----
-  private List<WorkingTimes> workingTimes;
+  private Set<BookingEntity> bookings;
  
-  @OneToMany(mappedBy = "staffMember")
-  @OrderBy("startTime asc")
-  public List<WorkingTime> getWorkingTimes() {
-    return workingTimes;
+  
+  @OneToMany(mappedBy = "idTable", fetch = FetchType.LAZY)
+  @OrderBy("bookingDate asc")
+  public Set<BookingEntity> getBookings() {
+
+    return this.bookings;
   }
- 
-  public void setWorkingTimes(List<WorkingTime> workingTimes) {
-    this.workingTimes = workingTimes;
+
+  
+  public void setBookings(Set<BookingEntity> bookings) {
+
+    this.bookings = bookings;
   }
 ----
+//io.oasp.application.mtsj.dishmanagement.dataaccess.api;
 The value of the +@OrderBy+ annotation consists of an attribute name of the class followed by +asc+ (ascending) or +desc+ (descending). 
 
 To store information about a n:m relationship, a separate table has to be used, as one column cannot store several values (at least if the database schema is in first normal form). +
 For example if one wanted to extend the example application so that all ingredients of one +FoodDrink+ can be saved and to model the ingredients themselves as entities (e.g. to store additional information about them), this could be modeled as follows (extract of class +FoodDrink+):
 [source,java]
 ----
-  private Set<Order> ingredients;
+  private List<IngredientEntity> extras;
  
-  @ManyToMany
-  @JoinTable
-  public Set<Ingredient> getIngredients() {
-    return ingredients;
+  @ManyToMany(fetch = FetchType.LAZY)
+  @JoinTable(name = "DishIngredient", joinColumns = {
+  @javax.persistence.JoinColumn(name = "idDish") }, inverseJoinColumns = @javax.persistence.JoinColumn(name = "idIngredient"))
+  public List<IngredientEntity> getExtras() {
+
+    return this.extras;
   }
- 
-  public void setOrders(Set<Ingredient> ingredients) {
-    this.ingredients = ingredients;
+
+  /**
+   * @param extras new value of {@link #getExtras}.
+   */
+  public void setExtras(List<IngredientEntity> extras) {
+
+    this.extras = extras;
   }
 ----
 Information about the relation is stored in a table called +BILL_ORDER+ that has to have two columns, one for referencing the Bill, the other one for referencing the Order. Note that the +@JoinTable+ annotation is not needed in this case because a separate table is the default solution here (same for n:m relations) unless there is a +mappedBy+ element specified.
@@ -498,25 +616,30 @@ Using JPA/Hibernate it is possible to use either lazy or eager loading. Eager lo
         
 Application based on the OASP4J must use lazy loading by default. Projects generated with the project generator are already configured so that this is actually the case (this is done in the file +NamedQueries.hbm.xml+).
         
-For some entities it might be beneficial if eager loading is used. For example if every time a +Bill+ is processed, the +Order+ entities it refers to are needed, eager loading can be used as shown in the following listing:
+For some entities it might be beneficial if eager loading is used. For example if every time a +Booking+ is processed, the +Table+ entities it refers to are needed, eager loading can be used as shown in the following listing:
+//io.oasp.application.mtsj.bookingmanagement.dataaccess.api; BookingEntity
+
 [source,java]
 ----
-  @OneToMany(fetch = FetchType.EAGER)
-  @JoinTable
-  public Set<Order> getOrders() {
-    return orders;
+  @ManyToOne(fetch = FetchType.EAGER)
+  @JoinColumn(name = "idTable")
+  public TableEntity getTable() {
+
+    return this.table;
   }
 ----
 This can be done with all four types of relationships (annotations: +@OneToOne+, +@ManyToOne+, +@OneToMany+, +@ManyToOne+).
 
+//Adjusted example with the other ones. Still need to adjust the text
 ==== Cascading Relationships
 It is not only possible to specify what happens if an entity is loaded that has some relationship to other entities (see above), but also if an entity is for example persisted or deleted. By default, nothing is done in these situations. +
 This can be changed by using the +cascade+ element of the annotation that specifies the relation type (+@OneToOne+, +@ManyToOne+, +@OneToMany+, +@ManyToOne+). For example, if a +StaffMember+ is persisted, all its +WorkingTime+'s should be persisted and if the same applies for deletions (and some other situations, for example if an entity is reloaded from the database, which can be done using the +refresh(Object)+ method of an EntityManager), this can be realized as shown in the following listing (extract of the +StaffMember+ class):
 [source,java]
 ----
-  @OneToMany(mappedBy = "staffMember", cascade=CascadeType.ALL)
-  public Set<WorkingTime> getWorkingTime() {
-    return workingTime;
+   @OneToMany(mappedBy = "idTable", cascade=CascadeType.ALL)
+  public Set<BookingEntity> getBookings() {
+
+    return this.bookings;
   }
 ----
 There are several +CascadeTypes+, e.g. to specify that a "cascading behavior" should only
@@ -525,7 +648,7 @@ be used if an entity is persisted (+CascadeType.PERSIST+) or deleted (+CascadeTy
 === Embeddable
 An embeddable Object is a way to implement xref:relationships[relationships] between xref:entity[entities], but with a mapping in which both entities are in the same database table. If these entities are often needed together, this is a good way to speed up database operations, as only one access to a table is needed to retrieve both entities. 
 
-Suppose the restaurant example application has to be extended in a way that it is possible to store information about the addresses of +StaffMember+'s, this can be done with a new +Address+ class:
+Suppose the restaurant example application has to be extended in a way that it is possible to store information about the addresses of +User+'s, this can be done with a new +Address+ class:
 [source,java]
 ----
 ...
@@ -560,7 +683,7 @@ Using the address in the +StaffMember+ entity class can be done as shown in the 
 ...
  
 @Entity
-public class StaffMemberEntity implements StaffMember {
+public class UserEntity extends ApplicationPersistenceEntity implements User {
  
   ...
   private Address address;

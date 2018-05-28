@@ -4,9 +4,9 @@ toc::[]
 = REST
 REST (https://en.wikipedia.org/wiki/Representational_state_transfer[REpresentational State Transfer]) is an inter-operable protocol for link:guide-service-layer[services] that is more lightweight than link:guide-soap[SOAP].
 However, it is no real standard and can cause confusion. Therefore we define best practices here to guide you.
-
+//Fixed Typo
 *ATTENTION:*
-REST and RESTful often implies very strict and specific rules and conventions. However different people will often have different opinions of such rules. We learned that this leads to "religious discussions" (starting from `PUT` vs. `POST` and IDs in path vs. playload up to Hypermedia and https://en.wikipedia.org/wiki/HATEOAS[HATEOAS]). These "religious discussions" waste a lot of time and money without adding real value in case of common business applications (if you publish your API on the internet to billions of users this is a different story). Therefore we give best practices that lead to simple, easy and pragmatic "HTTP APIs" (to avoid the term "REST services" and end "religious discussions"). Please also note that we do not want to assault anybody nor force anyone to follow our guidelines. Please read the following best practices carefully and be aware that they might slightly differ from what your first hit on the web will say about REST (see e.g. http://restcookbook.com/[RESTful cookbook]).
+REST and RESTful often implies very strict and specific rules and conventions. However different people will often have different opinions of such rules. We learned that this leads to "religious discussions" (starting from `PUT` vs. `POST` and IDs in path vs. payload up to Hypermedia and https://en.wikipedia.org/wiki/HATEOAS[HATEOAS]). These "religious discussions" waste a lot of time and money without adding real value in case of common business applications (if you publish your API on the internet to billions of users this is a different story). Therefore we give best practices that lead to simple, easy and pragmatic "HTTP APIs" (to avoid the term "REST services" and end "religious discussions"). Please also note that we do not want to assault anybody nor force anyone to follow our guidelines. Please read the following best practices carefully and be aware that they might slightly differ from what your first hit on the web will say about REST (see e.g. http://restcookbook.com/[RESTful cookbook]).
 
 == URLs
 URLs are not case sensitive. Hence, we follow the best practice to use only lower-case-letters-with-hypen-to-separate-words.
@@ -90,27 +90,29 @@ The protocol to communicate these validation errors to the client is worked on a
 == JAX-RS
 For implementing REST services we use the https://jax-rs-spec.java.net/[JAX-RS] standard. As an implementation we recommend http://cxf.apache.org/[CXF]. For link:guide-json[JSON] bindings we use http://wiki.fasterxml.com/JacksonHome[Jackson] while link:guide-xml[XML] binding works out-of-the-box with http://www.oracle.com/technetwork/articles/javase/index-140168.html[JAXB].
 To implement a service you write an interface with JAX-RS annotations for the API and a regular implementation class annotated with `@Named` to make it a spring-bean. Here is a simple example:
-
+//io.oasp.application.mtsj.dishmanagement.service.rest
+//Replaced the old example with the current DishmanagementInterface + Impl
 [source,java]
 --------
-@Path("/tablemanagement/v1")
+@Path("/dishmanagement/v1")
 @Consumes(MediaType.APPLICATION_JSON)
 @Produces(MediaType.APPLICATION_JSON)
-public interface TableManagementRestService extends RestService {
-  @GET
-  @Path("/table/{id}/")
-  public TableEto getTable(@PathParam("id") long id);
-}
+public interface DishmanagementRestService {
 
-@Named
-public class TableManagementRestServiceImpl implements TableManagementRestService {
+  @GET
+  @Path("/category/{id}/")
+  public CategoryEto getCategory(@PathParam("id") long id);
+
+@Named("DishmanagementRestService")
+public class DishmanagementRestServiceImpl implements DishmanagementRestService {
+
   @Inject
-  private TableManagement tableManagement;
+  private Dishmanagement dishmanagement;
 
   @Override
-  public TableEto getTable(@PathParam("id") long id) {
+  public CategoryEto getCategory(long id) {
 
-    return this.tableManagement.getTable(idAsLong);
+    return this.dishmanagement.findCategory(id);
   }
 }
 --------
@@ -232,29 +234,32 @@ The response contains the requested page of the collection in JSON format, using
 
 
 Compare the code needed on server side to accept this request:
-
+//io.oasp.application.mtsj.dishmanagement.service.rest
 [source,java]
 ----
- @Path("/order")
- @POST
- public List<OrderCto> findOrders(OrderSearchCriteriaTo criteria) {
-    return this.salesManagement.findOrderCtos(criteria);
+@Path("/category/search")
+  @POST
+  public PaginatedListTo<CategoryEto> findCategorysByPost(CategorySearchCriteriaTo searchCriteriaTo) {
+    return this.dishmanagement.findCategoryEtos(searchCriteriaTo);
  }
 ----
 
 With the equivalent code required if doing it the RESTful way by issuing a `GET` request:
-
+//I adjusted the example according to how I think it should be (not 100% certain it's correct).
 [source,java]
 ----
-  @Path("/order")
+ @Path("/category/search")
+  @POST @Path("/order")
   @GET
-  public List<OrderCto> findOrders(@Context UriInfo info) {
+  public PaginatedListTo<CategoryEto> findCategorysByPost( @Context UriInfo info) {
 
     RequestParameters parameters = RequestParameters.fromQuery(info);
-    OrderSearchCriteriaTo criteria = new OrderSearchCriteriaTo();
-    criteria.setTableId(parameters.get("tableId", Long.class, false));
-    criteria.setState(parameters.get("state", OrderState.class, false));
-    return this.salesManagement.findOrderCtos(criteria);
+    CategorySearchCriteriaTo criteria = new CategorySearchCriteriaTo();
+    criteria.setName(parameters.get("name", Long.class, false));
+    criteria.setDescription(parameters.get("description", OrderState.class, false));
+    criteria.setShowOrder(parameters.get("showOrder", OrderState.class, false));
+    return this.dishmanagement.findCategoryEtos(criteria);
+
   }
 ----
 

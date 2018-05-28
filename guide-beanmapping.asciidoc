@@ -1,18 +1,18 @@
 :toc: macro
 toc::[]
-
+//Replaced old person examples with new User example
 = Bean-Mapping
 
 For decoupling you sometimes need to create separate objects (beans) for a different view. E.g. for an external service you will use a link:guide-transferobject[transfer-object] instead of the link:guide-dataaccess-layer#entity[persistence entity] so internal changes to the entity do not implicitly change or break the service. 
 
 Therefore you have the need to map similar objects what creates a copy. This also has the benefit that modifications to the copy have no side-effect on the original source object. However, to implement such mapping code by hand is very tedious and error-prone (if new properties are added to beans but not to mapping code):
-
+//Just the example adjusted to our MTSJ
 [source,java]
 ----
-public PersonTo mapPerson(PersonEntity source) {
-  PersonTo target = new PersonTo();
-  target.setFirstName(source.getFirstName());
-  target.setLastName(source.getLastName());
+public UserEto mapUser(UserEntity source) {
+  UserEto target = new UserEto();
+  target.setUsername(source.getUsername());
+  target.setEmail(source.getEmail());
   ...
   return target;
 }
@@ -30,15 +30,17 @@ To get access to the +BeanMapper+ we use this dependency in our POM:
       <artifactId>oasp4j-beanmapping</artifactId>
     </dependency>
 ----
-
+//io.oasp.application.mtsj.usermanagement.logic.impl
+//Replaced old example with a new one that exists
 == Bean-Mapper Usage
 Then we can get the +BeanMapper+ via link:guide-dependency-injection[dependency-injection] what we typically already provide by an abstract base class (e.g. +AbstractUc+). Now we can solve our problem very easy:
 
 [source,java]
 ----
-PersonEntity person = ...;
 ...
-return getBeanMapper().map(person, PersonTo.class);
+UserEntity resultEntity = ...;
+...
+return getBeanMapper().map(resultEntity, UserEto.class);
 ----
 
 There is also additional support for mapping entire collections.
