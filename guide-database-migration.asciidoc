@@ -57,8 +57,8 @@ If you want to use Flyway set the following property in any case to prevent Hibe
 ----
 spring.jpa.hibernate.ddl-auto=validate
 ----
-
-The setting must be communicated to and coordinated with the customer and her needs.
+//Changed her to their to generalize it.
+The setting must be communicated to and coordinated with the customer and their needs.
 In acceptance testing the same configuration as for the production environment should be enabled.
 
 Since migration scripts will also be versioned the end-of-line (EOL) style must be fixated according to https://github.com/flyway/flyway/issues/253[this issue]. This is however solved in flyway 4.0+ and the latest OASP release.

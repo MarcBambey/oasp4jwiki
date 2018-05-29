@@ -26,7 +26,7 @@ Make sure that entity manager (configured in +beans-jpa.xml+) also scans the pac
 Now let your DAO implementation extend from +AbstractRevisionedDao+ instead of +AbstractDao+ and your DAO interface extend from +[Application]RevisionedDao+ instead of +[Application]Dao+.
 
 The DAO now has a method +getRevisionHistory(entity)+ available to get a list of revisions for a given entity and a method +load(id, revision)+ to load a specific revision of an entity with the given ID.
-
+//Auditing is not used anymore
 To enable auditing for a entity simply place the +@Audited+ annotation to your entity and all entity classes it extends from.
 [source,java]
 ----

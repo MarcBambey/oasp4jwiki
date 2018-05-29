@@ -52,7 +52,7 @@ Best Practices for applications:
 
 
 === Wiremock
-
+//Wiremock is not used in the current Application
 If you need to mock remote connections such as HTTP-Servers, wiremock offers easy to use functionality. For a full description see the http://wiremock.org/[homepage] or the https://github.com/tomakehurst/wiremock[github repository]. Wiremock can be used either as a JUnit Rule, in Java outside of JUnit or as a standalone process. The mocked server can be configured to respond to specific requests in a given way via a fluent Java API, JSON files and JSON over HTTP. An example as an integration to JUnit can look as follows.
 [source,java]
 -------------------------------------------
@@ -70,7 +70,7 @@ public class WireMockOfferImport{
   ...}
 -------------------------------------------
 This creates a server on a randomly chosen free port on the running machine. You can also specify the port to be used if wanted. Other than that there are several options to further configure the server. This includes HTTPs, proxy settings, file locations, logging and extensions.
-
+//We could replace this with a test example from io.oasp.application.mtsj.dishmanagement.logic.impl
 [source,java]
 -------------------------------------------
   @Test
@@ -154,7 +154,7 @@ This section introduces how to implement tests on the different levels with the 
 
 === Module Test
 In OASP4J you can extend the abstract class https://github.com/oasp/oasp4j/blob/master/modules/test/src/main/java/io/oasp/module/test/common/base/ModuleTest.java[ModuleTest] to basically get access to assertions. In order to test classes embedded in dependencies  and external services one needs to provide mocks for that. As the xref:test-automation-technology-stack[technology stack] recommends we use the Mockito framework to offer this functionality. The following example shows how to implement Mockito into a JUnit test.
-
+//We durrently don't use Mokito in the application
 [source,java]
 -------------------------------------------
 import static org.mockito.Mockito.when;
@@ -261,6 +261,7 @@ Invalid conditions are: No credentials, table does not exist or table is not fre
 If you combine one invalid condition with valid conditions this yields the following test cases. Note that not working actions yield exceptions that can be expected in a test method.
 
 * The caller of the method does not have the required credentials
+//You could use the Ordermanagement as example here
 [source,java]
 -------------------------------------------
 @Test(expected = AccessDeniedException.class)
@@ -286,7 +287,7 @@ public void testDeleteTableWithCredentials() {...}
 -------------------------------------------
 
 This type of testing is known as http://epf.eclipse.org/wikis/xp/xp/guidances/guidelines/equivalence_class_analysis_E178943D.html[equivalence class analysis]. Note that this is a general practice and can be applied to every level of tests.
-
+//Subsystem test is currently not used
 === Subsystem Test
 OASP4J provides a simple test infrastructure to aid with the implementation of subsystem tests. It becomes available by simply subclassing link:https://github.com/oasp/oasp4j/blob/master/samples/core/src/test/java/io/oasp/gastronomy/restaurant/general/common/base/AbstractRestServiceTest.java[AbstractRestServiceTest.java].
 [source,java]

@@ -44,17 +44,18 @@ COMMENT ON COLUMN RevInfo.id is 'Primary key of revision (changing transaction)'
 COMMENT ON COLUMN RevInfo."timestamp" is 'Date and time of the change';
 COMMENT ON COLUMN RevInfo."user" is 'Login of the user who triggered the change';
 
-CREATE TABLE StaffMember(
-  id                  NUMBER(19,0),
-  modificationCounter NUMBER(10,0) NOT NULL,
-  firstname           VARCHAR2(255 CHAR),
-  lastname            VARCHAR2(255 CHAR),
-  login               VARCHAR2(255 CHAR) NOT NULL,
-  role                VARCHAR2(10 CHAR),
-  CONSTRAINT PK_StaffMember_id PRIMARY KEY (id),
-  CONSTRAINT UK_StaffMember_role UNIQUE (role)
+-- *** User ***
+CREATE TABLE User (
+  id BIGINT NOT NULL AUTO_INCREMENT,
+  modificationCounter INTEGER NOT NULL,
+  username VARCHAR (255) NULL,
+  password VARCHAR (255) NULL,
+  email VARCHAR (120) NULL,
+  idRole BIGINT NOT NULL,
+  CONSTRAINT PK_User PRIMARY KEY(id),
+  CONSTRAINT PK_User_idRole FOREIGN KEY(idRole) REFERENCES UserRole(id) NOCHECK
 );
-COMMENT ON TABLE StaffMember is 'The employees of the restaurant';
+COMMENT ON TABLE User is 'The users of the restaurant site';
 ...
 --------
 
@@ -65,20 +66,24 @@ For insert, update, delete, etc. of data SQL scripts should additionally follow 
 * Insert column values always starting with id, modificationCounter, [dtype, ] ...
 * List columns with fixed length values (boolean, number, enums, etc.) before columns with free text to support alignment of multiple insert statements
 * Pro Tip: Get familiar with column mode of `+notepad+++` when editing large blocks of similar insert statements.
+//Updated with current example from the application
+//MyThaiStar.java.mtsj.core.src.main.resources.db.migration.V0005__R001_Master_data.sql
 
-[source,sql]
 --------
-INSERT INTO StaffMember(id, modificationCounter, login, role, firstname, lastname) VALUES (0, 0, 'chief', 'CHIEF', 'Charly', 'Chief');
-INSERT INTO StaffMember(id, modificationCounter, login, role, firstname, lastname) VALUES (1, 0, 'cook', 'COOK', 'Carl', 'Cook');
-INSERT INTO StaffMember(id, modificationCounter, login, role, firstname, lastname) VALUES (2, 0, 'waiter', 'WAITER', 'Willy', 'Waiter');
-INSERT INTO StaffMember(id, modificationCounter, login, role, firstname, lastname) VALUES (3, 0, 'barkeeper', 'BARKEEPER', 'Bianca', 'Barkeeper');
+INSERT INTO UserRole(id, modificationCounter, name, active) VALUES (0, 1, 'Customer', true);
+INSERT INTO UserRole(id, modificationCounter, name, active) VALUES (1, 1, 'Waiter', true);
+INSERT INTO User(id, modificationCounter, username, password, email, idRole) VALUES (0, 1, 'user0', 'password', 'user0@mail.com', 0);
+INSERT INTO User(id, modificationCounter, username, password, email, idRole) VALUES (1, 1, 'waiter', 'waiter', 'waiter@mail.com', 1);
 
-INSERT INTO Product(id, modificationCounter, dtype, description) VALUES (1, 1, 'Meal', 'Schnitzel');
-INSERT INTO Product(id, modificationCounter, dtype, description) VALUES (2, 1, 'Meal', 'Goulasch');
-INSERT INTO Product(id, modificationCounter, dtype, description) VALUES (3, 1, 'Meal', 'Pfifferlinge');
-INSERT INTO Product(id, modificationCounter, dtype, description) VALUES (4, 1, 'Meal', 'Salat');
-INSERT INTO Product(id, modificationCounter, dtype, description) VALUES (5, 1, 'Meal', 'Pizza');
-INSERT INTO Product(id, modificationCounter, dtype, description) VALUES (6, 1, 'Meal', 'Flammkuchen');
+INSERT INTO Table(id, modificationCounter, seatsNumber) VALUES (0, 1, 4);
+INSERT INTO Table(id, modificationCounter, seatsNumber) VALUES (1, 1, 4);
+INSERT INTO Table(id, modificationCounter, seatsNumber) VALUES (2, 1, 4);
+INSERT INTO Table(id, modificationCounter, seatsNumber) VALUES (3, 1, 4);
+INSERT INTO Table(id, modificationCounter, seatsNumber) VALUES (4, 1, 6);
+INSERT INTO Table(id, modificationCounter, seatsNumber) VALUES (5, 1, 6);
+INSERT INTO Table(id, modificationCounter, seatsNumber) VALUES (6, 1, 6);
+INSERT INTO Table(id, modificationCounter, seatsNumber) VALUES (7, 1, 8);
+INSERT INTO Table(id, modificationCounter, seatsNumber) VALUES (8, 1, 8);
 ...
 --------
 
