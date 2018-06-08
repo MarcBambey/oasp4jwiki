@@ -52,7 +52,6 @@ Best Practices for applications:
 
 
 === Wiremock
-//Wiremock is not used in the current Application
 If you need to mock remote connections such as HTTP-Servers, wiremock offers easy to use functionality. For a full description see the http://wiremock.org/[homepage] or the https://github.com/tomakehurst/wiremock[github repository]. Wiremock can be used either as a JUnit Rule, in Java outside of JUnit or as a standalone process. The mocked server can be configured to respond to specific requests in a given way via a fluent Java API, JSON files and JSON over HTTP. An example as an integration to JUnit can look as follows.
 [source,java]
 -------------------------------------------
@@ -70,7 +69,6 @@ public class WireMockOfferImport{
   ...}
 -------------------------------------------
 This creates a server on a randomly chosen free port on the running machine. You can also specify the port to be used if wanted. Other than that there are several options to further configure the server. This includes HTTPs, proxy settings, file locations, logging and extensions.
-//We could replace this with a test example from io.oasp.application.mtsj.dishmanagement.logic.impl
 [source,java]
 -------------------------------------------
   @Test

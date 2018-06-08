@@ -42,8 +42,6 @@ For methods to validate go to their declaration and add constraint annotations t
 ** +@Valid+ annotation to the arguments to validate (if that class itself is annotated with constraints to check).
 ** +@NotNull+ for required arguments.
 ** Other constraints (e.g. +@Size+) for generic arguments (e.g. of type +String+ or +Integer+). However, consider to create link:guide-datatype[custom datatypes] and avoid adding too much validation logic (especially redundant in multiple places).
-//Replaced old example with BookingmanagementRestServiceImpl
-//io.oasp.application.mtsj.bookingmanagement.service.rest
 .*BookingmanagementRestServiceImpl.java*
 [source,java]
 ----
@@ -55,15 +53,12 @@ public class BookingmanagementRestServiceImpl implements BookingmanagementRestSe
 ----
 
 * Finally add appropriate validation constraint annotations to the fields of the ETO class.
-//io.oasp.application.mtsj.bookingmanagement.logic.api.to
 .*BookingCto.java*
 [source,java]
 ----
   @Valid
   private BookingEto booking;
 ----
-//io.oasp.application.mtsj.bookingmanagement.logic.api.to
-//Added an extra example due to this one being the only one using the hibernate-validation
 .*BookingEto.java*
 [source,java]
 ----
@@ -108,9 +103,6 @@ public class Range<V extends Comparable<V>> {
 == Stateful Validation
 For complex and stateful business validations we do not use BV (possible with groups and context, etc.) but follow KISS and just implement this on the server in a straight forward manner.
 An example is the deletion of a table in the example application. Here the state of the table must be checked first:
-//io.oasp.application.mtsj.bookingmanagement.logic.impl
-//Replaced the old example with is not stateful anymore -which I think is weird- with a new one
-//Text needs adjustments aswell
 *BookingmanagementImpl.java*
 [source,java]
 ----

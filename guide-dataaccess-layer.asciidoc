@@ -580,7 +580,6 @@ For example, if +WorkingTime+ objects should be sorted by their start time, this
     this.bookings = bookings;
   }
 ----
-//io.oasp.application.mtsj.dishmanagement.dataaccess.api;
 The value of the +@OrderBy+ annotation consists of an attribute name of the class followed by +asc+ (ascending) or +desc+ (descending). 
 
 To store information about a n:m relationship, a separate table has to be used, as one column cannot store several values (at least if the database schema is in first normal form). +
@@ -617,7 +616,6 @@ Using JPA/Hibernate it is possible to use either lazy or eager loading. Eager lo
 Application based on the OASP4J must use lazy loading by default. Projects generated with the project generator are already configured so that this is actually the case (this is done in the file +NamedQueries.hbm.xml+).
         
 For some entities it might be beneficial if eager loading is used. For example if every time a +Booking+ is processed, the +Table+ entities it refers to are needed, eager loading can be used as shown in the following listing:
-//io.oasp.application.mtsj.bookingmanagement.dataaccess.api; BookingEntity
 
 [source,java]
 ----
@@ -630,7 +628,6 @@ For some entities it might be beneficial if eager loading is used. For example i
 ----
 This can be done with all four types of relationships (annotations: +@OneToOne+, +@ManyToOne+, +@OneToMany+, +@ManyToOne+).
 
-//Adjusted example with the other ones. Still need to adjust the text
 ==== Cascading Relationships
 It is not only possible to specify what happens if an entity is loaded that has some relationship to other entities (see above), but also if an entity is for example persisted or deleted. By default, nothing is done in these situations. +
 This can be changed by using the +cascade+ element of the annotation that specifies the relation type (+@OneToOne+, +@ManyToOne+, +@OneToMany+, +@ManyToOne+). For example, if a +StaffMember+ is persisted, all its +WorkingTime+'s should be persisted and if the same applies for deletions (and some other situations, for example if an entity is reloaded from the database, which can be done using the +refresh(Object)+ method of an EntityManager), this can be realized as shown in the following listing (extract of the +StaffMember+ class):

@@ -1,6 +1,5 @@
 :toc: macro
 toc::[]
-//The guide itself is fine only the diagram is outdated -needs existing classes-
 = Transfer-Objects
 
 The technical data model is defined in form of link:guide-dataaccess-layer#entity[persistent entities].

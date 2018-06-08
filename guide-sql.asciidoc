@@ -66,8 +66,6 @@ For insert, update, delete, etc. of data SQL scripts should additionally follow 
 * Insert column values always starting with id, modificationCounter, [dtype, ] ...
 * List columns with fixed length values (boolean, number, enums, etc.) before columns with free text to support alignment of multiple insert statements
 * Pro Tip: Get familiar with column mode of `+notepad+++` when editing large blocks of similar insert statements.
-//Updated with current example from the application
-//MyThaiStar.java.mtsj.core.src.main.resources.db.migration.V0005__R001_Master_data.sql
 
 --------
 INSERT INTO UserRole(id, modificationCounter, name, active) VALUES (0, 1, 'Customer', true);

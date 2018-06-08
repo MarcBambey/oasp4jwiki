@@ -22,7 +22,7 @@ We recommend to use AOP with care but we consider it established for the followi
 * Exception facades for link:guide-service-layer[services] but only if no other solution is possible (use alternatives such as link:guide-service-layer#rest-exception-handling[JAX-RS provider] instead).
 
 == AOP Debugging
-//Exchange picture with one of the current version?
+
 When using AOP with dynamic proxies the debugging of your code can get nasty. As you can see by the red boxes in the call stack in the debugger there is a lot of magic happening while you often just want to step directly into the implementation skipping all the AOP clutter. When using Eclipse this can easily be archived by enabling _step filters_. Therefore you have to enable the feature in the Eclipse tool bar (highlighted in read).
 
 image::images/eclipse-debug-aop.png["AOP debugging", width="450", link="images/eclipse-debug-aop.png"]

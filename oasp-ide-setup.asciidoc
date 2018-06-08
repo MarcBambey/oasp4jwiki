@@ -52,7 +52,6 @@ Do another check whether there are files in folder +$projectLoc\workspaces\main\
 +
 image::images/eclipse-run-as.png[width="813", high="390", align="center"]
 +
-//Update URL to /mythaistar
 Once started, the OASP server applications runs on http://localhost:8081 with /oasp4j-sample-server/ as _context-root_. Access Server on base url: http://localhost:8081/oasp4j-sample-server[http://localhost:8081/oasp4j-sample-server], login with waiter/waiter and have a look at the services list provided.
 
 . If you want to properly test the example application you might want to build the OASP4js-client as follows: 

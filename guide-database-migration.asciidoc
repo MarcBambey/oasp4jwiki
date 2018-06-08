@@ -57,7 +57,6 @@ If you want to use Flyway set the following property in any case to prevent Hibe
 ----
 spring.jpa.hibernate.ddl-auto=validate
 ----
-//Changed her to their to generalize it.
 The setting must be communicated to and coordinated with the customer and their needs.
 In acceptance testing the same configuration as for the production environment should be enabled.
 

@@ -12,7 +12,6 @@ BLOB stands for **B**inary **L**arge **Ob**ject. A BLOB may be an image, an offi
 | `general.logic.base.UcManageBinaryObject`    | Use case for managing BinaryObject. This use case contains methods for finding, getting, deleting and saving a BLOB.
 | `general.logic.impl.UCManageBinaryObjectImpl`    | Implemenentation of the UcManageBinaryObject
 |=============================================
-//Blobs are no longer used in the sample application
 == Implementing BLOB support: an example
 In the sample application the business component Offermanagement uses BLOBs for product pictures.
 Feel free to use the following approach as starting point for BLOB support in your application.

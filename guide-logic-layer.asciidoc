@@ -24,7 +24,6 @@ There are two ways of designing a component part interface at the logic layer. D
 For less complex apps with fairly simple component interfaces (even if it contains many methods, e.g. several find methods), you put all methods to be exposed directly into a single interface. The implementation of the component part interface provides all the corresponding methods in one class.
 
 Here is an example of a simple interface:
-//io.oasp.application.mtsj.imagemanagement.logic.api
 [source,java]
 ----
 /**
@@ -67,7 +66,6 @@ public interface Imagemanagement {
 }
 }
 ----
-//Doesn't exist anymore in the current version
 === Component Part Interface with Use Case Decomposition
 For complex applications, component part interfaces consisting of many different use cases, it is recommended to further sub-divide it into separate use-case-interfaces to be aggregated in the main component interface. This suits for better maintainability. 
 
@@ -110,7 +108,6 @@ public interface UcChangeTable {
 The implementation of the use case typically needs access to the persistent data. This is done by link:guide-dependency-injection[injecting] the corresponding link:guide-dataaccess-layer#data-access-object[DAO]. According to the  link:architecture#architecture-principles[principle _data sovereignty_] , only DAOs of the same business component may be accessed directly from the use case. For accessing data from other components the use case has to use the corresponding xref:component-interface[component interface]. Further, it shall not expose persistent entities from the persistence layer and has to map them to link:guide-transferobject[transfer objects].
 
 Within a use-case implementation, entities are mapped via a +BeanMapper+ to link:guide-dataaccess-layer#entity[persistent entities]. Let's take a quick look at some of the StaffManagement methods: 
-//io.oasp.application.mtsj.imagemanagement.logic.impl
 [source,java]
 ----
 package io.oasp.application.mtsj.imagemanagement.logic.impl;
@@ -139,7 +136,6 @@ public class ImagemanagementImpl extends AbstractComponentFacade implements Imag
 As you can see, provided entities are mapped to corresponding business objects (here +StaffMemberEto.class+). These business objects are simple POJOs (Plain Old Java Objects) and stored in: +
 +<package-name-prefix>.<domain>.<application-name>.<component>.api+. +
 The mapping process of these entities and the declaration of the +AbstractLayerImpl+ class are described xref:passing-parameters-among-components[here]. For every business object there has to be a mapping entry in the +src/main/resources/config/app/common/dozer-mapping.xml+ file. For example, the mapping entry of a +UserEto+ to a +User+ looks like this:
-//Changed example to User since the Table doesn't exist.
 [source,html]
 ----
   <mapping>
@@ -147,8 +143,6 @@ The mapping process of these entities and the declaration of the +AbstractLayerI
     <class-b>io.oasp.application.mtsj.usermanagement.persistence.api.entity.User</class-b>
   </mapping>
 ----
-//Staff management doesnt exist anymore.
-//draw a new class diagram with some other Management e.g. Imagemanagement/Usermanagement.
 Below, a class diagram illustrating the pattern is shown (here: the ``StaffManagement`` business component):
 
 image::images/guide-logic-layer.png["logic layer component pattern", width="450"]

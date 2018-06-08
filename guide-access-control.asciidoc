@@ -169,8 +169,7 @@ The `oasp4j-security` module provides a simple and efficient way to define permi
 |Role|`AccessControlGroup`|With `type="role"`.
 |Access Control|`AccessControl`| Super type that represents a tree of `AccessControlGroups` and `AccessControlPermissions`. If a principal "has" a `AccessControl` he also "has" all `AccessControls` with according permissions in the spanned sub-tree.
 |=======================
-//The current schema is just empty -keep it as an example?-
-//MyThaiStar\java\mtsj\core\src\main\resources\config\app\security\access-control-schema.xml
+
 .Example access-control-schema.xml
 [source,xml]
 ----
@@ -260,8 +259,7 @@ The authorization (in terms of Spring security "access management") can be enabl
 ==== Configuration on Java Method level
 As state of the art oasp4j will focus on role-based authorization to cope with authorization for executing use case of an application. 
 We will use the JSR250 annotations, mainly `@RolesAllowed`, for authorizing method calls against the permissions defined in the annotation body. This has to be done for each use-case method in logic layer. Here is an example:
-//Changed example -still need to adjust the text
-//io.oasp.application.mtsj.ordermanagement.logic.impl
+
 [source,java]
 ----
 public class OrdermanagementImpl extends AbstractComponentFacade implements Ordermanagement {
