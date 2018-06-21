@@ -20,7 +20,7 @@ image::https://raw.githubusercontent.com/schowalter0112/Prints-OASP4j-Tutorial/m
 +
 [source,bash]
 -----
-set SETTINGS_REL_PATH=oasp4j\oasp4j-ide\oasp4j-ide-settings\src\main\settings
+set SETTINGS_REL_PATH=oasp4j\oasp4j-ide\oasp4j-idehttps://coconet.capgemini.com/sf/go/projects.apps2_devon/frs.oasp4j_ide[oasp-ide package]-settings\src\main\settings
 -----
 +
 . Open +console.bat+ and check out the git repositories you need to work on into +$projectLoc\workspaces\main+. with the following commands:
@@ -64,34 +64,7 @@ git --help
 -----
 +
 If you get an error instead of the git help output, please redo step 1.
-.. Now call the following commands:
-+
-[source,cmd]
------
-cd workspaces/main/oasp4js/
-npm install -g gulp
-npm install -g bower
-npm install
-cd java
-mvn install
------
-If [INFO] BUILD SUCCESS -> next step
-+
-.. You can then extract the client from +oasp4js/java/target/oasp4js-sample-*-web.zip+ into +oasp4j/oasp4j-samples/oaps4j-sample-server/src/main/webapp/jsclient+. You may have to create the folder `jsclient` by yourself. Restart your tomcat and open http://localhost:8081/oasp4j-sample-server/ or for simpler development run both tomcat and a grunt-server as overlay via:
-//Update Images with the new ones from the project
-+
-[source,cmd]
------
-cd workspaces/main/oasp4js
-gulp serve
------
-+
-A new tab in your webbrowser should open and you can try to sign in:
-+
-image::https://raw.githubusercontent.com/schowalter0112/Prints-OASP4j-Tutorial/master/Git%20hub%20client/sign%20in1.jpg[sign in1]
-+
-Test - User Name: waiter, Password: waiter. (Exception: If "Authentication failed. Please try again!" -> try to restart Tomcat in Eclipse or try to click the right button on Tomcat -> Clean... or Clean Tomcat Work Directory)
-+
-You should end up at this page:
-+
-image::https://github.com/schowalter0112/Prints-OASP4j-Tutorial/blob/master/Git%20hub%20client/Sign%20in.jpg?raw=true[Output][sign in ]
+
+
+
+. A detailed guide is available https://github.com/devonfw/devon/wiki/Client-GUI-Angular-run-oasp4js#run-the-mythaistar[here]
